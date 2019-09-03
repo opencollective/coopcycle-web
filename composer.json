@@ -140,9 +140,7 @@
         "cleaner-ignore": {
             "behat/behat": true,
             "behat/gherkin": true,
-            "giggsey/libphonenumber-for-php": [
-                "src/data/PhoneNumberMetadata_*.php"
-            ]
+            "giggsey/libphonenumber-for-php": true
         }
     }
 }

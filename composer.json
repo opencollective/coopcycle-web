@@ -136,6 +136,11 @@
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
+        },
+        "cleaner-ignore": {
+            "behat/behat": [
+                "*/i18n.php"
+            ]
         }
     }
 }

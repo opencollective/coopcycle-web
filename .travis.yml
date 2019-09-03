@@ -95,6 +95,7 @@ before_script:
   # Install PHP app
   - cp app/config/parameters.yml.travis app/config/parameters.yml
   - composer install --prefer-dist
+  - du -hs vendor/
   - php bin/console doctrine:schema:create --env=test
   - node_modules/.bin/encore dev
   # Start php-fpm

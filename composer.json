@@ -138,8 +138,9 @@
             "file": "app/config/parameters.yml"
         },
         "cleaner-ignore": {
-            "behat/behat": [
-                "*/i18n.php"
+            "behat/gherkin": [
+                "i18n.php",
+                "libpath.php"
             ]
         }
     }

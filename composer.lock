@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8344694f12db2c1b93563986936c8508",
+    "content-hash": "9c47983a560b2c9047a6fbacd326bf0c",
     "packages": [
         {
             "name": "api-platform/core",
@@ -202,6 +202,48 @@
                 "time"
             ],
             "time": "2019-03-29T03:04:45+00:00"
+        },
+        {
+            "name": "barryvdh/composer-cleanup-plugin",
+            "version": "v0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/composer-cleanup-plugin.git",
+                "reference": "1efa5ce0aa415f1e7bc7fccfbedfe43d8f0941b0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/composer-cleanup-plugin/zipball/1efa5ce0aa415f1e7bc7fccfbedfe43d8f0941b0",
+                "reference": "1efa5ce0aa415f1e7bc7fccfbedfe43d8f0941b0",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                },
+                "class": "Barryvdh\\Composer\\CleanupPlugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Barryvdh\\Composer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "A composer cleanup plugin, to remove tests and documentation to save space",
+            "time": "2018-05-14T08:32:22+00:00"
         },
         {
             "name": "beberlei/assert",

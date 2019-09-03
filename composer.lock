@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "02d55140e3ddf6a4548ecf8c4eb3aa45",
+    "content-hash": "8344694f12db2c1b93563986936c8508",
     "packages": [
         {
             "name": "api-platform/core",
@@ -1183,52 +1183,6 @@
                 "symmetric key cryptography"
             ],
             "time": "2018-07-24T23:27:56+00:00"
-        },
-        {
-            "name": "dg/composer-cleaner",
-            "version": "v2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dg/composer-cleaner.git",
-                "reference": "91f865f0b50c66dd647955a0e5ba7745d8086945"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dg/composer-cleaner/zipball/91f865f0b50c66dd647955a0e5ba7745d8086945",
-                "reference": "91f865f0b50c66dd647955a0e5ba7745d8086945",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.0",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "nette/tester": "^1.7"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "DG\\ComposerCleaner\\Plugin"
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "David Grudl",
-                    "homepage": "https://davidgrudl.com"
-                }
-            ],
-            "description": "Victor The Cleaner: removes unnecessary files from vendor directory.",
-            "keywords": [
-                "composer"
-            ],
-            "time": "2019-02-05T21:18:31+00:00"
         },
         {
             "name": "doctrine/annotations",

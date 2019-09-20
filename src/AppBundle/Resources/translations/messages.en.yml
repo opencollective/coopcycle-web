@@ -158,6 +158,7 @@ restaurant.form.createRestaurant: Create restaurant
 restaurant.form.save: Save
 restaurant.form.exclusive.label: This restaurant is exclusive
 restaurant.form.caterer.label: "This restaurant only accepts orders on quotation (ex: catering)"
+restaurant.form.deposit_refund_enabled.label: "This restaurant offers reusable packaging"
 restaurant.contract.title: Contract
 restaurant.deliveryPerimeterExpression.title: Delivery perimeter
 restaurant.deliveryPerimeterExpression.help: Define the accepted perimeter for deliveries.

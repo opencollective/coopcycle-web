@@ -134,6 +134,7 @@ restaurant.form.accessPlanning: Accéder au planning
 restaurant.form.createRestaurant: Créer un restaurant
 restaurant.form.exclusive.label: Ce restaurant est une exclusivité
 restaurant.form.caterer.label: "Ce restaurant accepte uniquement des commandes sur devis (ex : traiteur)"
+restaurant.form.deposit_refund_enabled.label: "Ce restaurant propose des emballages réutilisables"
 restaurant.form.save: Enregistrer
 restaurant.deliveryPerimeterExpression.title: Périmètre de livraison
 restaurant.deliveryPerimeterExpression.help: Définit le périmètre de livraison accepté.

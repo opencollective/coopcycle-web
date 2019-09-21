@@ -83,6 +83,7 @@ services:
     alias: 'libphonenumber.phone_number_util'
     public: true
   Liip\ImagineBundle\Service\FilterService: '@liip_imagine.service.filter'
+  Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface: '@Sylius\Component\Inventory\Checker\AvailabilityChecker'
 
   AppBundle\Routing\FoodtechEnabledAwareLoader:
     arguments:
@@ -708,3 +709,7 @@ services:
 
   AppBundle\Twig\CoopCycleExtension:
     $secret: '%secret%'
+
+  AppBundle\ReusablePackaging\InventoryOperator: ~
+
+  Sylius\Component\Inventory\Checker\AvailabilityChecker: ~

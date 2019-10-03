@@ -220,6 +220,16 @@ oneup_flysystem:
         task_images_local:
             local:
                 directory: '%kernel.root_dir%/../web/images/tasks'
+        restaurant_images_s3:
+            awss3v3:
+                client: s3_client
+                bucket: restaurant-images
+                prefix: ~
+        store_images_s3:
+            awss3v3:
+                client: s3_client
+                bucket: store-images
+                prefix: ~
     filesystems:
         product_images:
             adapter: product_images_local
@@ -237,6 +247,14 @@ oneup_flysystem:
             adapter: task_images_local
             alias: task_images_filesystem
             mount: task_images_filesystem
+        restaurant_images_s3:
+            adapter: restaurant_images_s3
+            alias: restaurant_images_s3_filesystem
+            mount: restaurant_images_s3_filesystem
+        store_images_s3:
+            adapter: store_images_s3
+            alias: store_images_s3_filesystem
+            mount: store_images_s3_filesystem
 
 vich_uploader:
     db_driver: orm
@@ -252,8 +270,8 @@ vich_uploader:
                     chars_per_dir: 2
                     dirs: 2
         store_image:
-            uri_prefix: /images/stores
-            upload_destination: store_images_filesystem
+            uri_prefix: ''
+            upload_destination: store_images_s3_filesystem
             namer: vich_uploader.namer_uniqid
             directory_namer:
                 service: vich_uploader.directory_namer_subdir
@@ -479,6 +497,23 @@ liip_imagine:
                 optipng:
                     strip_all: true
                     level: 4
+        store_thumbnail:
+            data_loader: store_images
+            filters:
+                upscale:
+                    min: [ 512, 512 ]
+                thumbnail:
+                    size: [ 512, 512 ]
+                    mode: outbound
+                    allow_upscale: true
+            post_processors:
+                jpegoptim:
+                    strip_all: true
+                    max: 80
+                    progressive: true
+                optipng:
+                    strip_all: true
+                    level: 4
     loaders:
         default:
             filesystem:
@@ -489,6 +524,9 @@ liip_imagine:
         product_thumbnail:
             filesystem:
                 data_root: '%kernel.project_dir%/web/images/products'
+        store_images:
+            flysystem:
+                filesystem_service: oneup_flysystem.store_images_s3_filesystem
 
 oneup_uploader:
     mappings:

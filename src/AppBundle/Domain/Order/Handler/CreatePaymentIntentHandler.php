@@ -30,8 +30,9 @@ class CreatePaymentIntentHandler
     {
         $order = $command->getOrder();
         $paymentMethodId = $command->getPaymentMethodId();
+        $automaticCapture = $command->isAutomaticCapture();
 
-        $payment = $order->getLastPayment(PaymentInterface::STATE_CART);
+        $payment = $order->getLastPayment(/* PaymentInterface::STATE_CART */);
         $payment->setPaymentMethod($paymentMethodId);
 
         // TODO Check if $payment !== null
@@ -41,7 +42,7 @@ class CreatePaymentIntentHandler
 
         try {
 
-            $intent = $this->stripeManager->createIntent($payment);
+            $intent = $this->stripeManager->createIntent($payment, $automaticCapture);
             $payment->setPaymentIntent($intent);
 
         } catch (StripeException $e) {

@@ -12,6 +12,7 @@ use AppBundle\Sylius\Order\OrderInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Psr\Log\NullLogger;
 use SimpleBus\Message\Bus\MessageBus;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use SM\StateMachine\StateMachineInterface;
@@ -45,7 +46,8 @@ class StripeManagerTest extends TestCase
             ->willReturn(self::$stripeApiKey);
 
         $this->stripeManager = new StripeManager(
-            $this->settingsManager->reveal()
+            $this->settingsManager->reveal(),
+            new NullLogger()
         );
     }
 
@@ -300,6 +302,9 @@ class StripeManagerTest extends TestCase
 
         $order = $this->prophesize(OrderInterface::class);
         $order
+            ->getId()
+            ->willReturn(1);
+        $order
             ->getNumber()
             ->willReturn('ABC');
         $order
@@ -322,13 +327,19 @@ class StripeManagerTest extends TestCase
             "application_fee_amount" => 750
         ]);
 
-        $this->stripeManager->createIntent($stripePayment);
+        $this->stripeManager->createIntent($stripePayment, false);
     }
 
     public function testConfirmIntent()
     {
+        $order = $this->prophesize(OrderInterface::class);
+        $order
+            ->getId()
+            ->willReturn(1);
+
         $stripePayment = new StripePayment();
         $stripePayment->setStripeUserId('acct_123456');
+        $stripePayment->setOrder($order->reveal());
 
         $paymentIntent = Stripe\PaymentIntent::constructFrom([
             'id' => 'pi_12345678',

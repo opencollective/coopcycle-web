@@ -9,12 +9,16 @@ use Stripe;
 class StripeManager
 {
     private $settingsManager;
+    private $logger;
 
     const STRIPE_API_VERSION = '2019-09-09';
 
-    public function __construct(SettingsManager $settingsManager)
+    public function __construct(
+        SettingsManager $settingsManager,
+        LoggerInterface $logger)
     {
         $this->settingsManager = $settingsManager;
+        $this->logger = $logger;
     }
 
     public function configure()
@@ -86,7 +90,7 @@ class StripeManager
     /**
      * @return Stripe\PaymentIntent
      */
-    public function createIntent(StripePayment $stripePayment): Stripe\PaymentIntent
+    public function createIntent(StripePayment $stripePayment, bool $automaticCapture = true): Stripe\PaymentIntent
     {
         $this->configure();
 
@@ -100,14 +104,22 @@ class StripeManager
             'confirmation_method' => 'manual',
             'confirm' => true,
             // 'statement_descriptor' => '...',
-            // @see https://stripe.com/docs/payments/payment-intents/use-cases#separate-auth-capture
-            'capture_method' => 'manual'
         ];
+
+        if (!$automaticCapture) {
+            // @see https://stripe.com/docs/payments/payment-intents/use-cases#separate-auth-capture
+            // @see https://stripe.com/docs/payments/payment-intents/creating-payment-intents#separate-authorization-and-capture
+            $payload['capture_method'] = 'manual';
+        }
 
         $this->configurePayment($stripePayment);
 
         $payload = $this->configureCreateIntentPayload($stripePayment, $payload);
         $stripeOptions = $this->getStripeOptions($stripePayment);
+
+        $this->logger->info(
+            sprintf('Order #%d | StripeManager::createIntent | %s', $order->getId(), json_encode($payload))
+        );
 
         $intent = Stripe\PaymentIntent::create($payload, $stripeOptions);
 
@@ -126,6 +138,10 @@ class StripeManager
         $intent = Stripe\PaymentIntent::retrieve(
             $stripePayment->getPaymentIntent(),
             $stripeOptions
+        );
+
+        $this->logger->info(
+            sprintf('Order #%d | StripeManager::confirmIntent | %s', $stripePayment->getOrder()->getId(), $intent->id)
         );
 
         $intent->confirm();

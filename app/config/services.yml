@@ -153,6 +153,8 @@ services:
     arguments:
       $objectManager: '@sylius.manager.order'
       $commandBus: '@command_bus'
+    tags:
+      - { name: monolog.logger, channel: stripe }
 
   AppBundle\Controller\RestaurantController:
     arguments:
@@ -694,3 +696,7 @@ services:
     $secret: '%secret%'
 
   AppBundle\Security\TokenStoreExtractor: ~
+
+  AppBundle\Service\StripeManager:
+    tags:
+      - { name: monolog.logger, channel: stripe }

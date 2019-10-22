@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c0f94ef41d83335071050d03b9a2c961",
+    "content-hash": "0603512bb39c2513c7b65527b9a14456",
     "packages": [
         {
             "name": "api-platform/core",
@@ -3279,16 +3279,16 @@
         },
         {
             "name": "gesdinet/jwt-refresh-token-bundle",
-            "version": "v0.7.1",
+            "version": "v0.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/markitosgv/JWTRefreshTokenBundle.git",
-                "reference": "ad475378b278719bebe4062c50b6135c5bcdd4e7"
+                "reference": "04db09a7f92ebebcc9d6582e487c7ee31d070db4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/markitosgv/JWTRefreshTokenBundle/zipball/ad475378b278719bebe4062c50b6135c5bcdd4e7",
-                "reference": "ad475378b278719bebe4062c50b6135c5bcdd4e7",
+                "url": "https://api.github.com/repos/markitosgv/JWTRefreshTokenBundle/zipball/04db09a7f92ebebcc9d6582e487c7ee31d070db4",
+                "reference": "04db09a7f92ebebcc9d6582e487c7ee31d070db4",
                 "shasum": ""
             },
             "require": {
@@ -3299,7 +3299,7 @@
             },
             "require-dev": {
                 "doctrine/doctrine-bundle": "~1.4",
-                "doctrine/mongodb-odm-bundle": "^3.4",
+                "doctrine/mongodb-odm-bundle": "^3.4|^4.0",
                 "doctrine/orm": "^2.4.8",
                 "phpspec/phpspec": "^3.0|^4.0"
             },
@@ -3328,7 +3328,7 @@
             "keywords": [
                 "jwt refresh token bundle symfony json web"
             ],
-            "time": "2019-07-03T06:42:07+00:00"
+            "time": "2019-10-14T13:23:10+00:00"
         },
         {
             "name": "giggsey/libphonenumber-for-php",

@@ -55,6 +55,7 @@ use Cocur\Slugify\SlugifyInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\UserBundle\Model\UserInterface;
+use Intervention\Image\ImageManagerStatic;
 use Predis\Client as Redis;
 use Ramsey\Uuid\Uuid;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -1317,6 +1318,37 @@ class AdminController extends Controller
         $response->setContent($message->getBody());
 
         return $response;
+    }
+
+    /**
+     * @Route("/admin/tasks/{id}.pdf", name="admin_task_pdf")
+     */
+    public function taskAsPdfAction($id, Request $request, SettingsManager $settingsManager)
+    {
+        $task = $this->getDoctrine()->getRepository(Task::class)->find($id);
+
+        // if (!$task) {
+        //     throw $this->createNotFoundException(sprintf('Task #%d does not exist', $id));
+        // }
+
+        $companyLogo = $settingsManager->get('company_logo');
+        if (!empty($companyLogo)) {
+            $fileSystem = $this->get('assets_filesystem');
+            $base64 = (string) ImageManagerStatic::make($fileSystem->read($companyLogo))->encode('data-url');
+        }
+
+        $html = $this->renderView('@App/pdf/task.html.twig', [
+            'company_logo' => $base64,
+            'task' => $task
+        ]);
+
+        $httpClient = $this->get('csa_guzzle.client.browserless');
+
+        $response = $httpClient->request('POST', '/pdf', ['json' => ['html' => $html]]);
+
+        return new Response((string) $response->getBody(), 200, [
+            'Content-Type' => 'application/pdf',
+        ]);
     }
 
     /**

@@ -16,6 +16,8 @@ services:
     autowire: true
     autoconfigure: true
     public: false
+    bind:
+      $taskImagesFilesystem: '@task_images_filesystem'
 
   AppBundle\Action\:
     resource: '../../src/AppBundle/Action/*'

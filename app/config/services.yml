@@ -8,6 +8,7 @@ imports:
   - { resource: services/serializer.yml }
   - { resource: services/twig.yml }
   - { resource: services/validators.yml }
+  - { resource: services/overrides.yml }
 
 services:
 
@@ -484,13 +485,6 @@ services:
     class: AppBundle\EventListener\AuthenticationWebSuccessHandler
     arguments: ['@security.http_utils', '@router']
 
-  coopcycle.user_manager:
-    parent: fos_user.user_manager.default
-    autowire: false
-    autoconfigure: false
-    public: true
-    class: AppBundle\Security\UserManager
-
   AppBundle\Service\SettingsManager:
     arguments:
       - "@craue_config"
@@ -673,14 +667,6 @@ services:
       $client: '@csa_guzzle.client.mjml_server'
 
   AppBundle\Utils\MessageLoggingMailer: ~
-
-  AppBundle\Utils\MessageLoggingTwigSwiftMailer:
-    autowire: false
-    autoconfigure: false
-    public: true
-    parent: 'fos_user.mailer.twig_swift'
-    arguments:
-      $mailer: '@AppBundle\Utils\MessageLoggingMailer'
 
   AppBundle\Api\DataTransformer\DeliveryInputDataTransformer: ~
   AppBundle\Api\DataTransformer\PricingRuleEvaluateInputDataTransformer: ~

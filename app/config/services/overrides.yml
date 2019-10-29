@@ -1,0 +1,16 @@
+services:
+
+  coopcycle.user_manager:
+    parent: fos_user.user_manager.default
+    autowire: false
+    autoconfigure: false
+    public: true
+    class: AppBundle\Security\UserManager
+
+  AppBundle\Utils\MessageLoggingTwigSwiftMailer:
+    parent: 'fos_user.mailer.twig_swift'
+    autowire: false
+    autoconfigure: false
+    public: true
+    arguments:
+      $mailer: '@AppBundle\Utils\MessageLoggingMailer'

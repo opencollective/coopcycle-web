@@ -10,6 +10,20 @@
     @page {
       size: A4
     }
+    header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10mm;
+    }
+    h3 {
+      text-align: center;
+    }
+    .title {
+      font-variant: small-caps;
+      border: 1px solid #333;
+      padding: 5mm;
+      margin-bottom: 10mm;
+    }
     </style>
     {# <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css"> #}
     {# <title>Document</title> #}
@@ -20,19 +34,34 @@
   <body class="A4">
 
     <section class="sheet padding-10mm">
-      <div class="pure-g">
-        <div class="pure-u-1-2">
+      <header>
+        <div>
           <img src="{{ company_logo }}" width="160" height="160">
         </div>
-        <div class="pure-u-1-2">BLA BLA</div>
+        <div>
+          <ul style="text-align: right">
+            <li>{{ coopcycle_setting('brand_name') }}</li>
+            <li>{{ 'now'|localizeddate('short', 'short') }}</li>
+          </ul>
+        </div>
+      </header>
+
+      <div class="title">
+        <h3>{{ 'proof_of_delivery.title'|trans }}</h3>
+        <p style="text-align: center;">{{ task.address.streetAddress }}</p>
       </div>
 
+      <div style="display: flex;">
       {% for image in task.images %}
-        <img src="{{ image|image_to_base64 }}" width="120">
+        <div style="border: 1px solid #000; padding: 10mm;">
+          <div>
+            <img src="{{ image|image_to_base64 }}" style="width: 50mm;">
+          </div>
+          <span>{{ image.createdAt|localizeddate('short', 'short') }}</span>
+        </div>
       {% endfor %}
+      </div>
     </section>
-
-
 
   </body>
 </html>
